@@ -32,5 +32,61 @@ VALUES ('2026-04-01', '2026-04-05', 1, 'Заброньовано', 2, 21),
 UPDATE:
 
 ```sql
+UPDATE room 
+SET room_number = 105 
+WHERE room_number = 101;
+SELECT * FROM room
 
+UPDATE customers
+SET customer_phone = '+380 50 777 52 42'
+WHERE customer_phone = '+380 50 777 77 77';
+SELECT (customer_phone) FROM customers
 ```
+
+DELETE: 
+
+```sql
+DELETE FROM room
+WHERE room_number >= 500;
+SELECT * FROM room
+
+DELETE FROM customers
+WHERE customer_id = 1;
+SELECT * FROM customers
+```
+
+SELECT:
+
+знайти всі доступні номери в готелі на конкретні дати:
+
+```sql
+SELECT * FROM room r
+WHERE r.room_id NOT IN (
+    SELECT res.room_id
+    FROM reservation res
+    WHERE 
+        res.check_in_date < '2026-04-06'
+        AND res.check_out_date > '2026-04-02'
+);
+```
+
+<img width="539" height="235" alt="{53D5BE1E-F17D-49D3-AFA0-AED5B0E26086}" src="https://github.com/user-attachments/assets/0a995498-5960-4ed3-b7b3-a57d0273dc2a" />
+
+
+обчислити загальну вартість для бронювання:
+
+```sql
+SELECT 
+    res.reservation_id,
+    r.room_number,
+    rt.type_name,
+    rt.price,
+    (res.check_out_date - res.check_in_date) AS nights,
+    rt.price * (res.check_out_date - res.check_in_date) AS total_price
+FROM reservation res
+JOIN room r ON res.room_id = r.room_id
+JOIN room_type rt ON r.room_type = rt.type_id;
+```
+
+<img width="858" height="144" alt="{1D4027A1-974F-4D18-9B1B-F82C4A3B2908}" src="https://github.com/user-attachments/assets/ef57dcfd-87a0-4cad-88dd-a41a3fc084ca" />
+
