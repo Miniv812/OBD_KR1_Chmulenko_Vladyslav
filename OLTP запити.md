@@ -64,10 +64,7 @@ SELECT * FROM room r
 WHERE r.room_id NOT IN (
     SELECT res.room_id
     FROM reservation res
-    WHERE 
-        res.check_in_date < '2026-04-06'
-        AND res.check_out_date > '2026-04-02'
-);
+    WHERE res.check_in_date < '2026-04-06' AND res.check_out_date > '2026-04-02' );
 ```
 
 <img width="539" height="235" alt="{53D5BE1E-F17D-49D3-AFA0-AED5B0E26086}" src="https://github.com/user-attachments/assets/0a995498-5960-4ed3-b7b3-a57d0273dc2a" />
