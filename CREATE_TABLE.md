@@ -34,7 +34,7 @@ CREATE TABLE if not exists customers(
 	customer_password varchar(100) NOT NULL
 );
 
-create type reservations_status as enum ('Заброньовано','Вільний');
+create type reservations_status as enum ('Заброньовано','Скасовано','Завершено');
 
 CREATE TABLE if not exists reservation(
 	reservation_id SERIAL PRIMARY KEY,
